@@ -1,5 +1,6 @@
 import React from 'react';
-
+import HijriDate from 'hijri-date';
+window.HijriDate = HijriDate;
 class App extends React.Component {
 
   render() {

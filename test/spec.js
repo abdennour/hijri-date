@@ -3,7 +3,7 @@ import expect from 'expect';
 import sinon from 'sinon';
 
 import {
- XXX-PACKAGE-NCAMEL
+ HijriDate
 } from '../src';
 describe(`hijri-date`, () => {
 

@@ -1,0 +1,6 @@
+src/
+test/
+coverage/
+docs-site/
+server.js
+webpack.docs.config.js

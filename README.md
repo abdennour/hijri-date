@@ -3,15 +3,17 @@
 
 # Overview :
 
- `hijri-date` provides `HijriDate` class which is  the appropriate class to handle hijri dates like the built-in `Date` is the appropriate class to handle gregorian dates.   
+ * `hijri-date` provides `HijriDate` class which is  the appropriate class to handle hijri dates like the built-in `Date` is the appropriate class to handle gregorian dates.   
 
-`HijriDate` class shared almost the same interface with `Date` class :
+* `HijriDate` class shared almost the same interface with `Date` class :
 
  - getFullYear
  - getDate (day of month)
  - getDay (day index of week)  
  - getHours
  - ...
+
+* Works on client-side (browser) and server-side (NodeJS apps).
 
 # Install
 
@@ -35,7 +37,7 @@ npm install hijri-date --save;
  const nowHijri = nowGreg.toHijri();     
 ```
 
-If you do not want to work safety, use `hijri-date/safe` as following :
+If you  want to work safety, use `hijri-date/safe` as following :
 
 ```js
 import HijriDate,{toHijri} from 'hijri-date/safe';

@@ -3,7 +3,7 @@ import {
   HijriToGreg,
   weekDay
 } from './DateConverter';
-import initializer from './Initializer';
+import initializer from './initializer';
 class HijriDate {
 
   constructor() {

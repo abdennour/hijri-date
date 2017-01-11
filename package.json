@@ -1,7 +1,7 @@
 {
   "name": "hijri-date",
-  "version": "0.0.1",
-  "description": "Still under development. It is not yet mature. Thank you for your understanding!",
+  "version": "0.1.0",
+  "description": "HijriDate Class behaves like the built-in Date class .. However, it is compatible with Hijri Calendar التقويم الهجري",
   "main": "index.js",
   "scripts": {
     "compile": "babel --presets es2015,stage-3,react -d lib/ src/",
@@ -18,7 +18,7 @@
     "url": "git+https://github.com/abdennour/hijri-date.git"
   },
   "keywords": [
-      "es7", "hijri-date", "hijri", "date"
+      "es7", "hijri-date", "hijri", "date", "islam", "calendar" ,"babel", "browesify"
   ],
   "author": "Abdennour TOUMI <http://abdennoor.com>",
   "license": "MIT",

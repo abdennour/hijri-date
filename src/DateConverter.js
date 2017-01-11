@@ -20,10 +20,9 @@ function GregToIsl(arg) {
     //added +1 on jd to comply isna rulling
     jd = 367 * y - intPart((7 * (y + 5001 + intPart((m - 9) / 7))) / 4) + intPart((275 * m) / 9) + d + 1729777 + delta
   }
-  arg.JD.value = jd
+
     //added -1 on jd1 to comply isna rulling
   jd1 = jd - delta
-  arg.wd.value = weekDay(jd1 % 7)
   l = jd - 1948440 + 10632
   n = intPart((l - 1) / 10631)
   l = l - 10631 * n + 354
@@ -36,7 +35,9 @@ function GregToIsl(arg) {
   return {
     d,
     m,
-    y
+    y,
+    dateOfWeek: jd1 % 7,
+    dayName:weekDay(jd1 % 7),
   };
 
 }
@@ -49,9 +50,8 @@ function IslToGreg(arg) {
   let y = parseInt(arg.HYear.value)
     //added - delta=1 on jd to comply isna rulling
   let jd = intPart((11 * y + 3) / 30) + 354 * y + 30 * m - intPart((m - 1) / 2) + d + 1948440 - 385 - delta
-  arg.JD.value = jd
-  arg.wd.value = weekDay(jd % 7);
-  let l,n ,i ,j ;
+
+  let l,n ,i ,j,k ;
 
   if (jd > 2299160) {
     l = jd + 68569
@@ -84,34 +84,36 @@ function IslToGreg(arg) {
   return {
     d,
     m,
-    y
+    y,
+    dateOfWeek: jd % 7,
+    dayName: weekDay(jd % 7),
   };
 }
 
 
 
 
-function weekDay(wdn) {
+export function weekDay(wdn) {
   if (wdn == 0) {
-    return "Monday"
+    return "Mon"
   }
   if (wdn == 1) {
-    return "Tuesday"
+    return "Tue"
   }
   if (wdn == 2) {
-    return "Wednesday"
+    return "Wed"
   }
   if (wdn == 3) {
-    return "Thursday"
+    return "Thu"
   }
   if (wdn == 4) {
-    return "Friday"
+    return "Fri"
   }
   if (wdn == 5) {
-    return "Saturday"
+    return "Sat"
   }
   if (wdn == 6) {
-    return "Sunday"
+    return "Sun"
   }
   return ""
 
@@ -137,23 +139,19 @@ function GregToHijri(gregDate) {
     },
     CMonth: {
       value: gregDate.getMonth() + 1
-    },
-    wd: {
-      value: ''
-    },
-    JD: {
-      value: ''
     }
   });
 
   return {
     year: hijriDate.y,
     month: hijriDate.m,
-    day: hijriDate.d,
+    date: hijriDate.d,
     hours: gregDate.getHours(),
     minutes: gregDate.getMinutes(),
     seconds: gregDate.getSeconds(),
-    milliseconds: gregDate.getMilliseconds()
+    milliseconds: gregDate.getMilliseconds(),
+    day: hijriDate.dateOfWeek,
+    dayName: hijriDate.dayName
   };
 
 };
@@ -161,26 +159,21 @@ function GregToHijri(gregDate) {
 function HijriToGreg(hijriDate) {
   const gregDate =  IslToGreg({
     HDay: {
-      value: hijriDate.day
+      value: hijriDate._date || hijriDate.date
     },
     HYear: {
-      value: hijriDate.year
+      value: hijriDate._year || hijriDate.year
     },
     HMonth: {
-      value: hijriDate.month
-    },
-    wd: {
-      value: ''
-    },
-    JD: {
-      value: ''
+      value: hijriDate._month || hijriDate.month
     }
   });
+
   return new Date(gregDate.y,
     gregDate.m -1 ,
     gregDate.d,
     hijriDate.getHours(),
-    hijriDate.getMinutes(),
+    hijriDate.getMinutes() ,
     hijriDate.getSeconds(),
     hijriDate.getMilliseconds()
   )

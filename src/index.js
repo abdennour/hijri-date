@@ -1,17 +1,21 @@
-import HijriDate from './HijriDate';
-import {GregToHijri} from './DateConverter';
+import HijriDate, {
+  toHijri
+} from './safe';
+
+const globalScope = (() => {
+  if (typeof window === 'object') {
+    return window;
+  }
+  if (typeof global === 'object') {
+    return global;
+  }
+  return {};
+})();
+
+globalScope.HijriDate = HijriDate;
 
 Date.prototype.toHijri = function() {
-    const {year, month, day} = GregToHijri(this);
-    return new HijriDate(
-      year,
-      month,
-      day,
-      this.getHours(),
-      this.getMinutes(),
-      this.getSeconds(),
-      this.getMilliseconds()
-    );
+  return toHijri(this);
 };
 
 export default HijriDate;

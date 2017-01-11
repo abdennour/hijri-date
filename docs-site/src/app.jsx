@@ -1,6 +1,7 @@
 import React from 'react';
-import HijriDate from 'hijri-date';
-window.HijriDate = HijriDate;
+import 'hijri-date';
+// import {HijriToGreg} from '../../src/DateConverter';
+// window.HijriToGreg= HijriToGreg;
 class App extends React.Component {
 
   render() {

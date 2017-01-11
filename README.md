@@ -37,10 +37,10 @@ npm install hijri-date --save;
  const nowHijri = nowGreg.toHijri();     
 ```
 
-If you  want to work safety, use `hijri-date/safe` as following :
+If you  want to work safety, use `hijri-date/lib/safe` as following :
 
 ```js
-import HijriDate,{toHijri} from 'hijri-date/safe';
+import HijriDate,{toHijri} from 'hijri-date/lib/safe';
 
 const today = new HijriDate();
 const day_eid_adha = new HijriDate(1438, 12, 10); // عيد الأضحى لسنة 1438
@@ -55,8 +55,24 @@ const nowHijri = toHijri(nowGreg);
 ### ES6 or before :
 
 ```js
-//TODO : to write
+ require('hijri-date')
+ // then HijriDate class will be public as Date class .
+// then, the same as above (see ES7 )
+//....
 ```
+- safe import :
+
+
+```js
+ const hijriSafe= require('hijri-date/lib/safe');
+ const HijriDate =  hijriSafe.default;
+ const toHijri   = hijriSafe.toHijri;
+// then, the same as above (see ES7 safe)
+const today = new HijriDate();
+const day_eid_adha = new HijriDate(1438, 12, 10); // عيد الأضحى لسنة 1438
+//......
+```
+
 
 # Contribution :
 

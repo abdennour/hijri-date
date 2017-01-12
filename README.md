@@ -81,6 +81,10 @@ const day_eid_adha = new HijriDate(1438, 12, 10); // عيد الأضحى لسن�
 
 # History of releases :
 
+   * **0.1.5**  :
+
+       - Refactor code.
+
    * **0.1.4**  :
 
      - supports `locales` (`Hijri.locales`).
@@ -93,7 +97,7 @@ const day_eid_adha = new HijriDate(1438, 12, 10); // عيد الأضحى لسن�
 
      - Substract days,hours, minutes,...
 
-     
+
    * **0.1.3**  : the first mature package.
 
 # License:

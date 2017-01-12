@@ -119,16 +119,6 @@ export function weekDay(wdn) {
 
 }
 
-function isnumeric(num) {
-  var strlen = num.length
-  var i
-  for (i = 0; i < strlen; ++i) {
-    if (!((num.charAt(i) >= '0') && (num.charAt(i) <= '9') || (num.charAt(i) == '.') || (num.charAt(i) == '-'))) {
-      return false;
-    }
-  }
-}
-
 function GregToHijri(gregDate) {
   const hijriDate = GregToIsl({
     CDay: {

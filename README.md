@@ -78,6 +78,24 @@ const day_eid_adha = new HijriDate(1438, 12, 10); // عيد الأضحى لسن�
 
  - Will be written soon . However, if you want to contribute, please, check 🔬 uni-tests firstly.
 
+
+# History of releases :
+
+   * **0.1.4**  :
+
+     - supports `locales` (`Hijri.locales`).
+
+     - `locales` can be extended .
+
+     - apply format on HijriDate's instance `new HijriDate().format('dddd')`
+
+     - Override `toString` to log the full date clearly such as `Date` class.
+
+     - Substract days,hours, minutes,...
+
+     
+   * **0.1.3**  : the first mature package.
+
 # License:
 
 MIT .

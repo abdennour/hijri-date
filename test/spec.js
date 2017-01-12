@@ -106,7 +106,7 @@ describe(`hijri-date`, () => {
     expect(() => target.minutes = 51).toNotThrow();
     expect(() => target.seconds = 47).toNotThrow();
     expect(() => target.milliseconds = 140).toNotThrow();
-     
+
   });
 
   it(`restricts "day" field to be readOnly`, () => {
@@ -132,5 +132,15 @@ describe(`hijri-date`, () => {
     target = new HijriDate(1399, 12, 29 );
     target.addDays(4);
     expect(target.year).toEqual(1400);
+  });
+
+  it(`subtract N days from date`, () => {
+    let target = new HijriDate(1399, 12,15);
+    target.subtractDays(4);
+    expect(target.date).toEqual(15-4);
+
+    target = new HijriDate(1399, 12, 4 );
+    target.subtractDays(10);
+    expect(target.month).toEqual(11);
   });
 })

@@ -4,6 +4,9 @@ import {
   weekDay
 } from './DateConverter';
 import initializer from './initializer';
+import dateFormat from './FormatDate';
+import {ar, en} from './locales';
+
 class HijriDate {
 
   constructor() {
@@ -90,6 +93,10 @@ class HijriDate {
   get milliseconds() {
     return this._milliseconds || 0;
   }
+
+  get timezoneOffset() {
+    return this.__proxy__.getTimezoneOffset();
+  }
   set hours(hours) {
     this._hours = hours;
     this.updateProxy();
@@ -110,6 +117,8 @@ class HijriDate {
     this._milliseconds = milliseconds;
     this.updateProxy();
   }
+
+
 
   get day() {
     return this._day;
@@ -159,6 +168,9 @@ class HijriDate {
     return this.time;
   }
 
+  getTimezoneOffset() {
+    return this.timezoneOffset;
+  }
 
   addDay() {
    this.addHours(24);
@@ -189,6 +201,32 @@ class HijriDate {
     this.time +=  n;
   }
 
+  subtractDays(days) {
+    Array.from({length: days}, (v, k) => k+1).forEach(i =>
+      this.subtractDay()
+    );
+  }
+
+  subtractDay() {
+   this.subtractHours(24);
+  }
+
+  subtractHours(n) {
+    this.subtractMinutes(n * 60);
+  }
+
+  subtractMinutes(n) {
+    this.subtractSeconds(n * 60);
+  }
+
+  subtractSeconds(n) {
+    this.subtractMilliseconds(1000 * n);
+  }
+
+  subtractMilliseconds(n) {
+    this.addMilliseconds(-n);
+  }
+
   updateProxy() {
     this.__proxy__ = HijriToGreg(this);
   }
@@ -197,14 +235,29 @@ class HijriDate {
     return this.__proxy__;
   }
 
+  format(mask, options) {
+    return dateFormat(this, ...arguments);
+  }
   valueOf() {
     return this.getTime();
+  }
+
+  toString() {
+    return this.format('default');
   }
 
   static now() {
     return Date.now();
   }
+ //TODO
+  // static today() {
+  //
+  // }
+
 }
+
+HijriDate.locales = {ar,en};
+HijriDate.defaultLocale = 'ar';
 
 const hijriTypeErrorMessage = `
   Wrong call of constructor !

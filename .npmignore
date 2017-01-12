@@ -1,5 +1,6 @@
 src/
 test/
+cdn/
 coverage/
 docs-site/
 server.js

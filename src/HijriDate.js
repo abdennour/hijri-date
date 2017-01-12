@@ -173,7 +173,7 @@ class HijriDate {
   }
 
   addDay() {
-   this.addHours(24);
+   return this.addHours(24);
   }
 
   addDays(days) {
@@ -183,52 +183,56 @@ class HijriDate {
       }, (v, k) => k + 1).forEach(i =>
         this.addDay()
       );
+    return this;
   }
 
   addHours(n) {
-    this.addMinutes(n * 60);
+    return this.addMinutes(n * 60);
   }
 
   addMinutes(n) {
-    this.addSeconds(n * 60);
+    return this.addSeconds(n * 60);
   }
 
   addSeconds(n) {
-    this.addMilliseconds(1000 * n);
+    return this.addMilliseconds(1000 * n);
   }
 
   addMilliseconds(n) {
     this.time +=  n;
+    return this;
   }
 
   subtractDays(days) {
     Array.from({length: days}, (v, k) => k+1).forEach(i =>
       this.subtractDay()
     );
+    return this;
   }
 
   subtractDay() {
-   this.subtractHours(24);
+   return this.subtractHours(24);
   }
 
   subtractHours(n) {
-    this.subtractMinutes(n * 60);
+    return this.subtractMinutes(n * 60);
   }
 
   subtractMinutes(n) {
-    this.subtractSeconds(n * 60);
+    return this.subtractSeconds(n * 60);
   }
 
   subtractSeconds(n) {
-    this.subtractMilliseconds(1000 * n);
+    return this.subtractMilliseconds(1000 * n);
   }
 
   subtractMilliseconds(n) {
-    this.addMilliseconds(-n);
+    return this.addMilliseconds(-n);
   }
 
   updateProxy() {
     this.__proxy__ = HijriToGreg(this);
+    return this;
   }
 
   toGregorian() {
@@ -238,6 +242,40 @@ class HijriDate {
   format(mask, options) {
     return dateFormat(this, ...arguments);
   }
+
+  ignoreTime() {
+    this.hours = 0;
+    this.minutes = 0;
+    this.seconds = 0 ;
+    this.milliseconds = 0;
+    this.updateProxy();
+    return this;
+  }
+
+  clone() {
+    return new HijriDate(this.time);
+  }
+
+  is() {
+    if (!arguments.length )
+      throw new Error(`function cannot be called without arguments`);
+    if (arguments.length ===1 && typeof arguments[0] === 'object' && Object.keys(arguments[0]).length)
+      return Object.keys(arguments[0]).every(prop => parseInt(arguments[0][prop]) === parseInt(this[prop]))
+    return Array.from(arguments).every((arg, i) => arg === this[dateProps[i]])
+  }
+
+  isToday() {
+    return HijriDate.today().time == this.clone().ignoreTime().time;
+  }
+
+  isYesterday() {
+    return HijriDate.yesterday().time == this.clone().ignoreTime().time;
+  }
+
+  isTomorrow() {
+    return HijriDate.tomorrow().time == this.clone().ignoreTime().time;
+  }
+
   valueOf() {
     return this.getTime();
   }
@@ -249,11 +287,22 @@ class HijriDate {
   static now() {
     return Date.now();
   }
- //TODO
-  // static today() {
-  //
-  // }
 
+  static today() {
+    return new HijriDate().ignoreTime();
+  }
+
+  static yesterday() {
+    return this.today().subtractDay();
+  }
+
+  static tomorrow() {
+    return this.today().addDay();
+  }
+
+  static addDay() {
+
+  }
 }
 
 HijriDate.locales = {ar,en};
@@ -270,4 +319,14 @@ const hijriTypeErrorMessage = `
     ⇢ new HijriDate(date[, format])
          .i.e: new HijriDate('1438-12-23', 'yyyy-mm-dd')
   `;
+
+export const dateProps = [
+  'year',
+  'month',
+  'date',
+  'hours',
+  'minutes',
+  'seconds',
+  'milliseconds'
+];
 export default HijriDate;

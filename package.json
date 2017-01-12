@@ -1,6 +1,6 @@
 {
   "name": "hijri-date",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "HijriDate Class behaves like the built-in Date class .. However, it is compatible with Hijri Calendar التقويم الهجري",
   "main": "index.js",
   "scripts": {
@@ -26,7 +26,11 @@
     "islam",
     "calendar",
     "babel",
-    "browesify"
+    "browesify",
+    "gregorian",
+    "convert",
+    "conversion",
+    "umm-al-qura"
   ],
   "author": "Abdennour TOUMI <http://abdennoor.com>",
   "license": "MIT",

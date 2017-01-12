@@ -20,7 +20,11 @@
 ```bash
 npm install hijri-date --save;
 ```
+or
 
+```html
+<script src="https://rawgit.com/abdennour/hijri-date/master/cdn/hijri-date-latest.js" type="text/javascript" ></script>
+```
 # Examples :
 
 ### ES7 or after :
@@ -74,12 +78,26 @@ const day_eid_adha = new HijriDate(1438, 12, 10); // عيد الأضحى لسن�
 ```
 
 
+# Documentation:
+
+  We are working on it . However, if you want to discover it , please, check 🔬 uni-tests firstly.
+
+  Documentation will be available soon إن شاء الله  
+
 # Contribution :
 
- - Will be written soon . However, if you want to contribute, please, check 🔬 uni-tests firstly.
+ - Will be written soon . However, if you want to contribute, please, check 🔬 uni-tests firstly & how it was written.
 
 
 # History of releases :
+
+   * **0.2.0**  :
+
+       - The first bundled version is generated (then, it will be embedded in `<script>` directly without using npm)
+
+       - New methods added to HijriDate class : isToday, isYesterday, isTomorrow, is, clone, ignoreTime,...etc
+
+       - Chaining methods calls by returning the instance itself (`this`) if it is possible  .  
 
    * **0.1.5**  :
 

@@ -3,6 +3,7 @@ import expect from 'expect';
 import sinon from 'sinon';
 
 import HijriDate, {toHijri} from '../src/safe';
+import {dateProps} from '../src/HijriDate';
 import initializer from '../src/initializer';
 
 const ignoreMilliSeconds = (date) => date.milliseconds = 0 && delete date.__proxy__;
@@ -99,6 +100,12 @@ describe(`hijri-date`, () => {
     const gregNow = Date.now();
     expectAlmostEqual(now, gregNow);
   });
+  it(`allows modifying date's fields: year, month,date`, () => {
+    const target = new HijriDate(1433, 10, 20, 10, 50,45,344);
+    expect(() => target.year ++ ).toNotThrow();
+    expect(() => target.month ++).toNotThrow();
+    expect(() => target.date --).toNotThrow();
+  });
 
   it(`allows modifying time's fields: hours, minutes,seconds...`, () => {
     const target = new HijriDate(1433, 10, 20, 10, 50,45,344);
@@ -143,4 +150,90 @@ describe(`hijri-date`, () => {
     target.subtractDays(10);
     expect(target.month).toEqual(11);
   });
+
+  it(`formats date according to default or given locale  `, () => {
+      const format = {string: 'yyyy-mm-dd', regexp: /^(\d+)-(1[0-2]|0[1-9])-(30|[1-2][0-9]|0[1-9])$/};
+      [[1436,12,20], [123, 11,30], [1395, 9, 11], [1232131,12,12]].forEach(ps =>
+        expect(new HijriDate(...ps).format(format.string)).toMatch(format.regexp)
+      )
+  });
+
+  it(`stringify instance with toString to be almost like toString of built-in class:Date`, () => {
+    const hijri = new HijriDate();
+    const gregorian = new Date();
+    const hijriStrings = hijri.toString().split(' ');
+    const gregorianString = gregorian.toString().split(' ');
+    hijriStrings.forEach((chunk, i) =>{
+      expect(isFinite(chunk)).toEqual(isFinite(gregorianString[i]));
+      expect(chunk.indexOf(':')).toEqual(gregorianString[i].indexOf(':'))
+    })
+  });
+
+  it(`ignores time by makeing time's fields null`, () => {
+      const target= new HijriDate();
+      target.ignoreTime();
+      expect(target.hours).toBeFalsy();
+      expect(target.minutes).toBeFalsy();
+      expect(target.seconds).toBeFalsy();
+      expect(target.milliseconds).toBeFalsy();
+   });
+
+   it(`clones instance`, () => {
+      const origin = new HijriDate(1438, 12, 26, 4, 55, 33, 113);
+      const cloned = origin.clone();
+      dateProps.forEach(prop =>
+        expect(cloned[prop]).toEqual(origin[prop])
+      );
+   });
+
+   describe('"is" method :is(object), is(...props)', () => {
+     it(`requires at least one argument`, () => {
+        expect(() => new HijriDate().is()).toThrow();
+     });
+     it(`checks equality of instance to given props`, () => {
+        const props = [1438, 11, 25, 8, 16, 55 ,222 ];
+        const instance = new HijriDate(...props);
+        expect(instance.is(...props)).toBeTruthy();
+        expect(instance.is(...props.slice(0,-1))).toBeTruthy();
+        expect(instance.is(...props.slice(0,-2))).toBeTruthy();
+        expect(instance.is(...props.slice(0,-3))).toBeTruthy();
+        expect(instance.is(...props.slice(0,-4))).toBeTruthy();
+        expect(instance.is(...props.slice(0,-5))).toBeTruthy();
+        expect(instance.is(...props.slice(0,-6))).toBeTruthy();
+        expect(instance.is({year: props[0]})).toBeTruthy();
+        expect(instance.is({year: props[0], milliseconds: props[6]})).toBeTruthy();
+        expect(instance.is({year: props[0]+1, milliseconds: props[6]+1})).toBeFalsy();
+     });
+   });
+
+   it(`checks if it is today`, () => {
+      const now = new HijriDate();
+      expect(now.isToday()).toBeTruthy();
+      now.addDay();
+      expect(now.isToday()).toBeFalsy();
+      now.subtractDay();
+      expect(now.isToday()).toBeTruthy();
+   });
+
+
+   it(`checks if it is yesterday`, () => {
+     const now = new HijriDate();
+     const target = now.subtractDay();
+     expect(target.isYesterday()).toBeTruthy();
+     target.addDay();
+     expect(target.isYesterday()).toBeFalsy();
+     now.subtractDay();
+     expect(target.isYesterday()).toBeTruthy();
+   });
+   it(`checks if it is tomorrow`, () => {
+     const now = new HijriDate();
+     const target = now.addDay();
+     expect(target.isTomorrow()).toBeTruthy();
+     target.addDay();
+     expect(target.isTomorrow()).toBeFalsy();
+     now.subtractDay();
+     expect(target.isTomorrow()).toBeTruthy();
+   });
+
+
 })

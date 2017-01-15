@@ -3,5 +3,6 @@ test/
 cdn/
 coverage/
 docs-site/
+docs/
 server.js
 webpack.docs.config.js

@@ -80,9 +80,7 @@ const day_eid_adha = new HijriDate(1438, 12, 10); // عيد الأضحى لسن�
 
 # Documentation:
 
-  We are working on it . However, if you want to discover it , please, check 🔬 uni-tests firstly.
-
-  Documentation will be available soon إن شاء الله  
+   Documentation  was published [here](https://abdennour.github.io/hijri-date/)
 
 # Contribution :
 
@@ -91,6 +89,15 @@ const day_eid_adha = new HijriDate(1438, 12, 10); // عيد الأضحى لسن�
 
 # History of releases :
 
+   * **0.2.2** :
+
+
+      - fix a bug related  to english localisation .
+
+      - overload constructor to accept default month (1) and default (date : 1)   
+
+      - add documentation
+      
    * **0.2.0**  :
 
        - The first bundled version is generated (then, it will be embedded in `<script>` directly without using npm)

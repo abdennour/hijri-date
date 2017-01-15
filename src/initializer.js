@@ -5,6 +5,8 @@ import StringDateParser from './StringDateParser';
 
 const defaultFormat = 'yyyy/mm/dd';
 const defaultProps ={
+  month:1,
+  date:1,
   hours:0,
   minutes:0,
   seconds:0,
@@ -19,6 +21,11 @@ class Initializer {
 
    static init_number (number) {
      return GregToHijri(new Date(number));
+   }
+
+   static init_number_number (year, month) {
+
+     return this.init_number_number_number(year, month, 1);
    }
    static init_number_number_number () {
      return this.initFromNumbers(...arguments);

@@ -49,7 +49,7 @@ export const en = {
         "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
     ],
     monthNames: [
-        "Muha", "Saf", "Rab1", "Rab2", "Jumd1", "Jumd2", "Rajb", "Shbn", "Shwl", "Oct", "Qada", "Hija",
+        "Muha", "Saf", "Rab1", "Rab2", "Jumd1", "Jumd2", "Rajb", "Shbn", "Rmdn", "Shwl" , "Qada", "Hija",
         "Muharram","Safar","Rabi'ul Awwal","Rabi'ul Akhir",
       	"Jumadal Ula","Jumadal Akhira","Rajab","Sha'ban",
       	"Ramadan","Shawwal","Dhul Qa'ada","Dhul Hijja"

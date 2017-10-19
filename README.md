@@ -23,7 +23,7 @@ npm install hijri-date --save;
 or
 
 ```html
-<script src="https://rawgit.com/abdennour/hijri-date/master/cdn/hijri-date-latest.js" type="text/javascript" ></script>
+<script src="https://rawgit.com/abdennour/hijri-date/master/cdn/hijri-date-latest.min.js" type="text/javascript" ></script>
 ```
 # Examples :
 
